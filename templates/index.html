@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Test</title>
+    <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+    <script>
+        console.log('Script loaded'); // Log to confirm script is loading
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM fully loaded and parsed'); // Log to confirm DOM is ready
+
+            try {
+                // Initialize the WebSocket connection
+                const socket = io(); // This connects to the Socket.IO server
+                console.log('Socket initialized'); // Log to confirm socket initialization
+
+                // Event handler for successful connection
+                socket.on('connect', () => {
+                    console.log('Connected to server');
+                    // Send a message to the server
+                    socket.send('Hello from client!');
+                });
+
+                // Event handler for receiving messages from the server
+                socket.on('response', (data) => {
+                    console.log('Message from server: ', data);
+                });
+            } catch (error) {
+                console.error('Error initializing WebSocket:', error);
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+</body>
+</html>
